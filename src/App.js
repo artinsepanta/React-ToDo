@@ -1,26 +1,56 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
+
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+  class App extends component {
+    constructor(){
+      super();
+      this.state = {
+        message:"My first React App",
+        newTodo: " ",
+        todos:[{
+          title: 'ACA_411',
+          done: false
+        },{
+          title : 'app',
+          done: false
+        }]
+      };
+    }
 
+    newTodoChanged(event) {
+      this.setState({
+        newTodo: event.target.value
+      });
+    }
+
+    formSubmitted(event){
+      event.preventDefault();
+      //console.log(this.state.newTodo);
+      this.setStated({
+       todos: [...this.state.todos, {
+         title: this.state.newTodo,
+         done: false
+       }]
+      });
+    }
+
+    render (){
+      return (
+      <div className="App">
+        <h1>{this.state.message}</h1>
+        <form onSubmit={(event) => this.formSubmitted(event)}>
+          <label for ="newTodo">NewTodo</label>
+          <input onChange={(event) => this.newTodoChanged(event)} id="newTodo" name="newTodo"/>
+          <butto type="submit">Add Todo</butto>
+        </form>
+        <ul>
+          {this.state.todos.map(todo => {
+            return <li key ={todo.title}> {todo.title} </li>
+          })}
+        </ul>
+      </div>
+    );
+  }
+  }
 export default App;
