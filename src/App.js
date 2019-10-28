@@ -28,6 +28,7 @@ import './App.css';
       event.preventDefault();
       //console.log(this.state.newTodo);
       this.setStated({
+        newTodo: '',
        todos: [...this.state.todos, {
          title: this.state.newTodo,
          done: false
@@ -41,7 +42,7 @@ import './App.css';
         <h1>{this.state.message}</h1>
         <form onSubmit={(event) => this.formSubmitted(event)}>
           <label for ="newTodo">NewTodo</label>
-          <input onChange={(event) => this.newTodoChanged(event)} id="newTodo" name="newTodo"/>
+          <input onChange={(event) => this.newTodoChanged(event)} id="newTodo" name="newTodo" value={this.state.newTodo}/>
           <butto type="submit">Add Todo</butto>
         </form>
         <ul>
