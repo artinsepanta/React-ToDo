@@ -20,3 +20,11 @@
 .App-link {
   color: #09d3ac;
 }
+input[type='checkbox']{
+  display: inline;
+  /*width : auto;*/
+}
+
+.done {
+  text-decoration : line-through;
+}

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 import './App.css';
 
-  class App extends component {
+  class App extends Component {
     constructor(){
       super();
       this.state = {
@@ -20,7 +20,7 @@ import './App.css';
 
     newTodoChanged(event) {
       this.setState({
-        newTodo: event.target.value
+      newTodo : event.target.value
       });
     }
 
@@ -36,6 +36,24 @@ import './App.css';
       });
     }
 
+    toggleTodoDone (event, index) {
+      //console.log(event, target, checked)
+      const todos =[...this.state.todos];
+      todos[index] = {...todos[index]};
+      todos[index].done = event.target.checked;
+      this.setStated({
+       todos
+      });
+    }
+
+    removeTodo(index){
+      const todos =[...this.state.todos];
+     todos.splice(index, 1);
+      this.setStated({
+       todos
+      });
+    }
+
     render (){
       return (
       <div className="App">
@@ -46,12 +64,19 @@ import './App.css';
           <butto type="submit">Add Todo</butto>
         </form>
         <ul>
-          {this.state.todos.map(todo => {
-            return <li key ={todo.title}> {todo.title} </li>
+          {this.state.todos.map((todo, index) => {
+            return (<li key ={todo.title}>
+               <input onChange= {(event) => this.toggleTodoDone(event, index)} type='checkbox'/>
+               <span className={todo.done ? 'done' : ''}>
+               {todo.title} 
+               </span>
+               <button onClick={()=> this.removeTodo(index)}>Remove</button>
+               </li>)
           })}
         </ul>
       </div>
     );
   }
   }
+
 export default App;
